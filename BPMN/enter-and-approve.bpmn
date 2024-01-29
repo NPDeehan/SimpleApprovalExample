@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="e414032" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0" camunda:diagramRelationId="ee8baacb-a859-4c88-ad60-2ce1278f372d">
+  <bpmn:process id="EnterAndApprove" name="Enter and Approve" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Something need to be entered and approved">
+      <bpmn:outgoing>Flow_15xar89</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_15xar89" sourceRef="StartEvent_1" targetRef="Activity_0kyf3yz" />
+    <bpmn:sequenceFlow id="Flow_0663p2z" sourceRef="Activity_0kyf3yz" targetRef="Activity_0ogmreq" />
+    <bpmn:exclusiveGateway id="Gateway_0liyv8o" name="Do you appove">
+      <bpmn:incoming>Flow_1e6whsa</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pveee0</bpmn:outgoing>
+      <bpmn:outgoing>Flow_14p0yjb</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1e6whsa" sourceRef="Activity_0ogmreq" targetRef="Gateway_0liyv8o" />
+    <bpmn:endEvent id="Event_08tzne4" name="Approved">
+      <bpmn:incoming>Flow_1pveee0</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1pveee0" name="Yes" sourceRef="Gateway_0liyv8o" targetRef="Event_08tzne4">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved = "yes"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_17h5er3" name="Rejected">
+      <bpmn:incoming>Flow_14p0yjb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_14p0yjb" name="No" sourceRef="Gateway_0liyv8o" targetRef="Event_17h5er3">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved = "no"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_0kyf3yz" name="Enter Data">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="enter-data-145whzw" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15xar89</bpmn:incoming>
+      <bpmn:outgoing>Flow_0663p2z</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0ogmreq" name="Approve or Reject Data">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="ViewDataForm" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0663p2z</bpmn:incoming>
+      <bpmn:outgoing>Flow_1e6whsa</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="EnterAndApprove">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="125" y="143" width="86" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0liyv8o_di" bpmnElement="Gateway_0liyv8o" isMarkerVisible="true">
+        <dc:Bounds x="565" y="93" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="553" y="63" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08tzne4_di" bpmnElement="Event_08tzne4">
+        <dc:Bounds x="682" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="676" y="143" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17h5er3_di" bpmnElement="Event_17h5er3">
+        <dc:Bounds x="682" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="679" y="255" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0abjpar_di" bpmnElement="Activity_0kyf3yz">
+        <dc:Bounds x="240" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rrs6k5_di" bpmnElement="Activity_0ogmreq">
+        <dc:Bounds x="400" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_15xar89_di" bpmnElement="Flow_15xar89">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="240" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0663p2z_di" bpmnElement="Flow_0663p2z">
+        <di:waypoint x="340" y="118" />
+        <di:waypoint x="400" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e6whsa_di" bpmnElement="Flow_1e6whsa">
+        <di:waypoint x="500" y="118" />
+        <di:waypoint x="565" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pveee0_di" bpmnElement="Flow_1pveee0">
+        <di:waypoint x="615" y="118" />
+        <di:waypoint x="682" y="118" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="639" y="100" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14p0yjb_di" bpmnElement="Flow_14p0yjb">
+        <di:waypoint x="590" y="143" />
+        <di:waypoint x="590" y="230" />
+        <di:waypoint x="682" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="598" y="184" width="14" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,47 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "e414032"
+  },
+  "schemaVersion": 14,
+  "id": "enter-data-145whzw",
+  "components": [
+    {
+      "text": "# Enter Important Data",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0gaf6u0",
+        "columns": null
+      },
+      "id": "Field_1gucabk"
+    },
+    {
+      "label": "Last Movie You Saw",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1cj0k1y",
+        "columns": null
+      },
+      "id": "Field_0k577u2",
+      "key": "movieName"
+    },
+    {
+      "label": "Rating out of 10",
+      "type": "number",
+      "layout": {
+        "row": "Row_0kwfn5p",
+        "columns": null
+      },
+      "id": "Field_1c9bro8",
+      "key": "rating",
+      "validate": {
+        "min": 1,
+        "max": 10
+      }
+    }
+  ],
+  "type": "default"
+}
